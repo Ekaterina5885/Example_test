@@ -1,0 +1,57 @@
+package ru.devprom.tests;
+
+import org.testng.Assert;
+import org.testng.annotations.Test;
+import org.openqa.selenium.By;
+
+/**
+ * @author Ekaterina <1005885@mail.ru>
+ */
+public class TestExample extends ProjectTestBase {
+
+    @Test(description="Example-1")
+    public void simpleTestOne() throws Exception {
+        try {
+            driver.findElement(By.cssSelector("[data-role='stop']")).click();
+            driver.findElement(By.xpath("//span[contains(text(), 'Графики')]")).click();
+            driver.findElement(By.xpath("//a[@href='/pm/my/project/reports/charts?report=charts&basemodule=project-reports&']")).click();
+
+            String actual = driver.findElement(By.xpath("//span[text()='Все графики']")).getText();
+            String expectedText = "Все графики";
+            Assert.assertEquals(actual, expectedText);
+        } catch (Exception e) {
+            System.out.println(e.getMessage());
+        }
+    }
+
+    @Test(description="Example-2")
+    public void simpleTestTwo() throws Exception {
+        try {
+            driver.findElement(By.cssSelector("[data-role='stop']")).click();
+            driver.findElement(By.xpath("//span[contains(text(), 'Графики')]")).click();
+            driver.findElement(By.xpath("//a[@href='/pm/my/project/reports/charts?report=charts&basemodule=project-reports&']")).click();
+            driver.findElement(By.xpath("//a[@href='/pm/my/tasks/chart/tasksimplementationchart?report=tasksimplementationchart&basemodule=tasks-chart&']")).click();
+
+            String actual = driver.findElement(By.xpath("//div[@class='btn transparent-btn']//span")).getText();
+            String expectedText = "График выполнения задач";
+            Assert.assertEquals(actual, expectedText);
+        } catch (Exception e) {
+            System.out.println(e.getMessage());
+        }
+    }
+
+    @Test(description="Example-3")
+    public void simpleTestThree() throws Exception {
+        try {
+            driver.findElement(By.cssSelector("[data-role='stop']")).click();
+            driver.findElement(By.xpath("//i[@class='icon-reqs icon-sidebar']")).click();
+            driver.findElement(By.xpath("//a[@module='requirements/docs']")).click();
+
+            String actual = driver.findElement(By.xpath("//span[text()='ТЗ и документы']")).getText();
+            String expectedText = "ТЗ и документы";
+            Assert.assertEquals(actual, expectedText);
+        } catch (Exception e) {
+            System.out.println(e.getMessage());
+        }
+    }
+}
